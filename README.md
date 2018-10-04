@@ -309,4 +309,8 @@ window.addEventListener('hashchange',function(e){
 
 ## 总结
 
+最终效果如下：看不见的可以看[这里](//jsfiddle.net/Mavericker/n6rL590g/278/embedded/)。
+
+<iframe width="100%" height="600" src="//jsfiddle.net/Mavericker/n6rL590g/278/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 通过本demo使我对vue的相关掌握更加熟练，包括之前没有用过的一些像自定义指令，过滤器的内容，不得不佩服官方的源码写的很简洁漂亮，还是要多看好代码，多模仿，多实践。

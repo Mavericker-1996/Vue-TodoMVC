@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>todoMVC demo</title>
+	<link rel="stylesheet" type="text/css" href="todomvc.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+	<div id='app'>
+		<header class='header'>
+			<div class='title'>todos</div>
+			<input class='newtodo' 
+			placeholder="What needs to be done?" 
+			autocomplete='off' 
+			v-model='newTodo' 
+			@keyup.enter='addTodo'>
+		</header>
+
+		<section class='main' v-show='todos.length'>
+			<!--全选按钮-->
+			<input class='toggle-all' type='checkbox' v-model='allDone'>
+
+			<!--todo列表-->
+			<ul class='todo-list'>
+				<li class='todo' 
+				v-for='todo in filteredTodos' 
+				:key='todo.id'
+				:class='{completed:todo.completed,editing:todo==editedTodo}'>
+
+				<!--正常状态显示的view-->          
+				<div class='view'>
+					<!--左边切换状态按钮-->
+					<input class='toggle' type='checkbox' v-model='todo.completed'>
+					<!--中间todo内容-->
+					<label @dblclick='editTodo(todo)'>{{todo.title}}</label>
+					<!--右边切换状态按钮-->
+					<button class='delete' @click='removeTodo(todo)'></button>
+				</div>    
+
+				<!--编辑状态状态显示的input-->
+				<input class='edit' type='text'
+				v-model='todo.title'
+				v-todo-focus="todo == editedTodo"
+				@blur='doneEdit(todo)'
+				@keyup.enter='doneEdit(todo)'
+				@keyup.esc='cancelEdit(todo)'>       
+			</li>
+		</ul>
+
+		<!--筛选按钮组-->
+		<footer class='footer' v-show='todos.length'>
+
+			<!--剩余未完成todo数量-->
+			<span class='todo-count'>
+				<strong>{{remaining}}</strong> {{remaining | pluralize}} left
+			</span>
+
+			<!--按钮部分-->
+			<ul class='filters'>
+				<li><a href="#/all" :class="{ selected: visibility == 'all' }">All</a></li>
+				<li><a href="#/active" :class="{ selected: visibility == 'active' }">Active</a></li>
+				<li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
+			</ul>
+			<button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
+				Clear completed
+			</button>
+		</footer> 
+	</section>
+</div>
+<script src="todomvc.js"></script>
+</body>
+
+</html>
